@@ -1,0 +1,23 @@
+﻿@page  "/timer"
+
+
+    <h3>@BlazorProduce1.Model.timer.Dtn </h3>
+
+@code{
+   
+    protected override async Task OnInitializedAsync()
+    {
+
+        await Task.Run(async () =>
+        {
+            while (true)
+            {
+                BlazorProduce1.Model.timer.Dtn = DateTime.Now;
+                await Task.Delay(500);
+                await InvokeAsync(StateHasChanged);
+            }
+        });
+    }
+
+
+}

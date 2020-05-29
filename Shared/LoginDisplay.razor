@@ -1,0 +1,32 @@
+﻿<AuthorizeView>
+
+    <Authorized>
+
+        <a style="color:white" class="m-5">@time</a>
+        <a style="color:white" href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
+        <form method="post" action="Identity/Account/LogOut">
+            <button style="color:white" type="submit" class="nav-link btn btn-link">退出</button>
+        </form>
+    </Authorized>
+    <NotAuthorized>
+        <a style="color:white" class="m-5">@time</a>
+        <a style="color:white" class="m-5" href="Identity/Account/Register">注册</a>
+        <a style="color:white" class="m-5" href="Identity/Account/Login">登录</a>
+    </NotAuthorized>
+</AuthorizeView>
+  @code{
+      protected string time { get; set; }
+      protected override bool ShouldRender() => true;
+      protected override async Task OnAfterRenderAsync(bool firstRender)
+      {
+          await base.OnAfterRenderAsync(firstRender);
+          while(true)
+          {
+              time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+              await Task.Delay(500);
+              StateHasChanged();
+          }
+      }
+
+
+}

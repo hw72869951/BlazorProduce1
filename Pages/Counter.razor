@@ -1,0 +1,50 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+
+<Button Color="Color.Primary">主要按钮</Button>
+<Button Color="Color.Secondary">次要按钮</Button>
+<Button Color="Color.Success">成功按钮</Button>
+<Button Color="Color.Danger">危险按钮</Button>
+<Button Color="Color.Warning">警告按钮</Button>
+<Button Color="Color.Info">信息按钮</Button>
+<Button Color="Color.Dark">黑暗按钮</Button>
+<Button Color="Color.Light">高亮按钮</Button>
+<Button Color="Color.Link">链接按钮</Button>
+
+<Menu Items="@GetIconSideMenuItems()" IsVertical="true" style="border-right: 1px solid #e6e6e6;" />
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private IEnumerable<MenuItem> GetIconSideMenuItems()
+    {
+        var ret = new List<MenuItem>();
+        ret.Add(new MenuItem() { Text = "系统设置", IsActive = true, Icon = "fa fa-fw fa-gears" });
+        ret.Add(new MenuItem() { Text = "权限设置", Icon = "fa fa-fw fa-users" });
+        ret.Add(new MenuItem() { Text = "日志设置", Icon = "fa fa-fw fa-database" });
+
+        ret[0].AddItem(new MenuItem() { Text = "网站设置", Icon = "fa fa-fw fa-fa" });
+        ret[0].AddItem(new MenuItem() { Text = "任务设置", Icon = "fa fa-fw fa-tasks" });
+
+        ret[1].AddItem(new MenuItem() { Text = "用户设置", Icon = "fa fa-fw fa-user" });
+        ret[1].AddItem(new MenuItem() { Text = "菜单设置", Icon = "fa fa-fw fa-dashboard" });
+        ret[1].AddItem(new MenuItem() { Text = "角色设置", Icon = "fa fa-fw fa-sitemap" });
+
+        ret[2].AddItem(new MenuItem() { Text = "访问日志", Icon = "fa fa-fw fa-bars" });
+        ret[2].AddItem(new MenuItem() { Text = "登录日志", Icon = "fa fa-fw fa-user-circle-o" });
+        ret[2].AddItem(new MenuItem() { Text = "操作日志", Icon = "fa fa-fw fa-edit" });
+
+        return ret;
+    }
+}
